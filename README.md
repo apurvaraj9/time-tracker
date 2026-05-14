@@ -35,6 +35,8 @@ Then open http://127.0.0.1:5000 in your browser.
 python report.py
 
 ## Project Structure
+
+```
 time-tracker/
 ├── tracker.py        # Main tracker loop
 ├── categorizer.py    # Keyword-based categorization logic
@@ -42,7 +44,8 @@ time-tracker/
 ├── report.py         # Terminal summary report
 ├── app.py            # Flask web server
 └── templates/
-└── dashboard.html  # Web dashboard UI
+    └── dashboard.html  # Web dashboard UI
+```
 
 ## Screenshots
 
