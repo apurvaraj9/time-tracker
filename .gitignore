@@ -1,0 +1,14 @@
+ # Database (contains your personal data)
+time_data.db
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# VS Code settings
+.vscode/
+
+# Virtual environments
+venv/
+env/
