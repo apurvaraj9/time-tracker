@@ -46,4 +46,4 @@ time-tracker/
 
 ## Screenshots
 
-(Add a screenshot of your dashboard here)
+![Dashboard](screenshot.png)
