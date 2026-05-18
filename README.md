@@ -50,3 +50,7 @@ time-tracker/
 ## Screenshots
 
 ![Dashboard](screenshot.png)
+
+## 👨‍💻 Author
+
+Built by **Apurva** as a portfolio project to demonstrate full-stack JavaScript, AI API integration, and audio/video processing skills.
