@@ -9,6 +9,7 @@ A Python desktop app that automatically tracks and categorizes how you spend you
 - Saves all sessions to a local SQLite database
 - Generates a terminal report with a visual bar chart
 - Web dashboard with a doughnut chart and session log (built with Flask + Chart.js)
+- **Clear Today button** on the dashboard to reset the day's data with a confirmation prompt
 
 ## Tech Stack
 
