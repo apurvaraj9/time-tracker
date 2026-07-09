@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.insert(0, os.path.dirname(__file__))
+
 from database import init_db, get_today_summary, get_today_detail
 
 init_db()

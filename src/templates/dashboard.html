@@ -140,13 +140,38 @@
     @media (max-width: 640px) {
       .grid { grid-template-columns: 1fr; }
     }
+
+    #clearBtn {
+      background: transparent;
+      border: 1px solid #f43f5e;
+      color: #f43f5e;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    #clearBtn:hover {
+      background: #f43f5e22;
+    }
+
+    #clearBtn.confirming {
+      border-color: #fb923c;
+      color: #fb923c;
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Time Tracker Dashboard</h1>
-  <p>{{ today }}</p>
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <div>
+      <h1>Time Tracker Dashboard</h1>
+      <p>{{ today }}</p>
+    </div>
+    <button id="clearBtn" onclick="clearToday()">Clear Today</button>
+  </div>
 </header>
 
 <div class="grid">
@@ -284,6 +309,47 @@
 
   // Auto-refresh every 30 seconds
   setInterval(() => { loadSummary(); loadDetail(); }, 30000);
+
+
+
+  // --- Clear today's data ---
+  let clearClicks = 0;
+
+  async function clearToday() {
+    const btn = document.getElementById("clearBtn");
+
+    // First click: ask for confirmation
+    if (clearClicks === 0) {
+      btn.textContent = "Are you sure?";
+      btn.classList.add("confirming");
+      clearClicks = 1;
+
+      // Reset button if user doesn't click again within 3 seconds
+      setTimeout(() => {
+        if (clearClicks === 1) {
+          btn.textContent = "Clear Today";
+          btn.classList.remove("confirming");
+          clearClicks = 0;
+        }
+      }, 3000);
+      return;
+    }
+
+    // Second click: actually clear
+    clearClicks = 0;
+    btn.textContent = "Clearing...";
+    btn.disabled = true;
+
+    await fetch("/api/clear", { method: "POST" });
+
+    // Reload charts and log after clearing
+    await loadSummary();
+    await loadDetail();
+
+    btn.textContent = "Clear Today";
+    btn.disabled = false;
+    btn.classList.remove("confirming");
+  }
 </script>
 
 </body>

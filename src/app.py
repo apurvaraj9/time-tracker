@@ -1,8 +1,12 @@
+import sys
+import os
+sys.path.insert(0, os.path.dirname(__file__))
+
 from flask import Flask, render_template, jsonify
 from database import init_db, get_today_summary, get_today_detail
 import datetime
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 init_db()
 
 @app.route("/")
@@ -28,6 +32,13 @@ def api_detail():
     # Convert to list of dicts for JSON
     records = df.head(50).to_dict(orient="records")
     return jsonify(records)
+
+@app.route("/api/clear", methods=["POST"])
+def api_clear():
+    """Deletes all of today's sessions from the database."""
+    from database import clear_today
+    clear_today()
+    return jsonify({"status": "ok"})
 
 if __name__ == "__main__":
     app.run(debug=True)
